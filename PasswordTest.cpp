@@ -62,13 +62,15 @@ TEST(PasswordTest, differing_cases)
 TEST(PasswordTest, differing_cases_for_new_test)
 {
         Password my_password;
-        bool actual = my_password.has_mixed_case("aAaA");
+	string str = "aAaA";
+        int actual = my_password.has_mixed_case(str);
         ASSERT_EQ(1, actual);
 }
 
 TEST(PasswordTest, matching_cases_for_new_test)
 {
         Password my_password;
-        bool actual = my_password.has_mixed_case("aaaa");
-        ASSERT_EQ(1, actual);
+	string str = "aaaa";
+        int actual = my_password.has_mixed_case(str);
+        ASSERT_EQ(0, actual);
 }
