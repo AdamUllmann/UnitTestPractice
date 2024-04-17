@@ -74,3 +74,51 @@ TEST(PasswordTest, matching_cases_for_new_test)
         int actual = my_password.has_mixed_case(str);
         ASSERT_EQ(0, actual);
 }
+
+TEST(PasswordTest, alphabet)
+{
+        Password my_password;
+        string str = "abcdefghijklmnopqrtuvwxyz";
+        int actual = my_password.has_mixed_case(str);
+        ASSERT_EQ(0, actual);
+}
+
+TEST(PasswordTest, alphabet_with_outlier)
+{
+        Password my_password;
+        string str = "abcdefgHijklm";
+        int actual = my_password.has_mixed_case(str);
+        ASSERT_EQ(1, actual);
+}
+
+TEST(PasswordTest, final_letter_caps)
+{
+        Password my_password;
+        string str = "abcsefG";
+        int actual = my_password.has_mixed_case(str);
+        ASSERT_EQ(1, actual);
+}
+
+TEST(PasswordTest, long_string)
+{
+        Password my_password;
+        string str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        int actual = my_password.has_mixed_case(str);
+        ASSERT_EQ(0, actual);
+}
+
+TEST(PasswordTest, all_caps)
+{
+        Password my_password;
+        string str = "ABCDEFG";
+        int actual = my_password.has_mixed_case(str);
+        ASSERT_EQ(0, actual);
+}
+
+TEST(PasswordTest, final_lowercase)
+{
+        Password my_password;
+        string str = "ABCDEFg";
+        int actual = my_password.has_mixed_case(str);
+        ASSERT_EQ(1, actual);
+}
