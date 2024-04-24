@@ -122,3 +122,51 @@ TEST(PasswordTest, final_lowercase)
         int actual = my_password.has_mixed_case(str);
         ASSERT_EQ(1, actual);
 }
+
+TEST(PasswordTest, auth_simple_test)
+{
+        Password my_password;
+        string str = "ABCDEFg";
+        int actual = my_password.authenticate(str);
+        ASSERT_EQ(0, actual);
+}
+
+TEST(PasswordTest, auth_matching)
+{
+        Password my_password;
+        string str = "ChicoCA-95929";
+        int actual = my_password.authenticate(str);
+        ASSERT_EQ(1, actual);
+}
+
+TEST(PasswordTest, short_password)
+{
+        Password my_password;
+        string str = "Chi";
+        int actual = my_password.set(str);
+        ASSERT_EQ(0, actual);
+}
+
+TEST(PasswordTest, no_mixed_case_pw)
+{
+        Password my_password;
+        string str = "afagjlfir";
+        int actual = my_password.set(str);
+        ASSERT_EQ(0, actual);
+}
+
+TEST(PasswordTest, should_work_password)
+{
+        Password my_password;
+        string str = "afagjLfir";
+        int actual = my_password.set(str);
+        ASSERT_EQ(1, actual);
+}
+
+TEST(PasswordTest, too_many_leading_chars)
+{
+        Password my_password;
+        string str = "aaaafjLfir";
+        int actual = my_password.set(str);
+        ASSERT_EQ(0, actual);
+}
